@@ -1,15 +1,18 @@
 {
   "name": "tabulated-data",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "demo": "vue-cli-service demo",
+    "docs": "npm run docs:serve",
+    "docs:build": "vue-cli-service docs --mode build",
+    "docs:serve": "vue-cli-service docs --mode serve",
+    "prepublish": "vue-cli-service lint && vue-cli-service docs --mode build && vue-cli-service build",
+    "start": "vue-cli-service serve"
   },
-  "dependencies": {
-    "vue": "^2.6.6"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-eslint": "^3.5.0",
@@ -17,7 +20,9 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.5.21"
+    "vue-cli-plugin-p11n": "^0.2.0",
+    "vue-template-compiler": "^2.5.21",
+    "vue": "^2.6.6"
   },
   "eslintConfig": {
     "root": true,
@@ -42,5 +47,17 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "files": [
+    "dist/tabulated-data.common.js",
+    "dist/tabulated-data.umd.min.js",
+    "dist/tabulated-data.umd.js",
+    "dist/tabulated-data.esm.js",
+    "src"
+  ],
+  "jsdelivr": "dist/tabulated-data.umd.min.js",
+  "main": "dist/tabulated-data.common.js",
+  "module": "dist/tabulated-data.esm.js",
+  "sideeffects": false,
+  "unpkg": "dist/tabulated-data.umd.min.js"
 }
