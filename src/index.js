@@ -1,28 +1,24 @@
-const version = '__VERSION__'
+const version = '__VERSION__';
+import VueTabulatedData from './components/TabulatedData';
+
+const DEFAULT_TABDATA = 'datatable';
 
 const install = Vue => {
-  /*
-   * NOTE:
-   *   if you need to extend Vue contstructor, you can extend it in here.
-   */
-
-  Vue.prototype.$add = (a, b) => {
-    return a + b
-  }
-
-  /*
-   * NOTE:
-   *  somthing implementation here ...
-   */
-}
+    /*
+     * NOTE:
+     *   if you need to extend Vue contstructor, you can extend it in here.
+     */
+    Vue.prototype.$tabulatedData = {};
+    Vue.component(DEFAULT_TABDATA, VueTabulatedData);
+};
 
 const plugin = {
-  install,
-  version
-}
+    install,
+    version
+};
 
-export default plugin
+export default plugin;
 
 if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(plugin)
+    window.Vue.use(plugin);
 }
