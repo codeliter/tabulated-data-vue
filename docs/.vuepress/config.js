@@ -6,7 +6,7 @@ module.exports = {
     '/': {
       lang: 'en-US',
       title: 'TabulatedData',
-      description: 'TabulatedData for Vue.js'
+      description: 'Datatable for Vue.js'
     }
   },
   themeConfig: {

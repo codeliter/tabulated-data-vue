@@ -1,4 +1,4 @@
-const { version } = require('../../package.json')
+const { version } = require('../../package.json');
 
 module.exports = (/*options, ctx*/) => ({
   async enhanceAppFiles () {
@@ -16,4 +16,4 @@ module.exports = (/*options, ctx*/) => ({
       content: code
     }]
   }
-})
+});
