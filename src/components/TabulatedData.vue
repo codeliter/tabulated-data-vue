@@ -1,13 +1,14 @@
 <template>
     <div class="tabulated-data">
         <div class="form-group tab-data-search">
-            <input type="text" class="form-control" v-model="search" placeholder="Search">
+            <input type="text" class="form-control" v-model="search" placeholder="Search"
+                   :disabled="loading && filteredList.length === 0">
         </div>
         <table class="table table-striped table-responsive-sm" style="width:100%">
             <thead>
             <tr>
-                <th scope="col" v-for="(column, columnIndex) in columns" @click="sort(column)" :key="columnIndex">
-                    {{column}}
+                <th scope="col" v-for="(column, columnIndex) in columns" @click="sort(column.field)" :key="columnIndex">
+                    {{column.label}}
                 </th>
                 <th v-if="actions.length > 0"></th>
             </tr>
@@ -16,8 +17,9 @@
 
             <tr v-for="(item, index) in (sortedActivity, filteredList)"
                 v-bind:key="index">
-                <td v-for="(col, colIndex) in columns" :key="colIndex" v-html="itemValue(item, col)">{{itemValue(item,
-                    col)}}
+                <td v-for="(col, colIndex) in columns" :key="colIndex" v-html="itemValue(item, col.field)">
+                    {{itemValue(item,
+                    col.field)}}
                 </td>
                 <!--v-if="dontShowKey === action && dontShowValue === action.dontShowKey"-->
                 <td v-if="actions.length > 0">
@@ -38,7 +40,7 @@
             </tr>
             <tr v-if="loading">
                 <td style='text-align: center' colspan="100">
-                    <Loader :showFull="false" loading-text="Please wait..."/>
+                    <spinner :theme="theme === 'light' ? 'dark' : 'light'"></spinner>
                 </td>
             </tr>
             <tr v-else-if="!loading && data.length === 0">
@@ -46,6 +48,8 @@
             </tr>
             </tbody>
         </table>
+
+
         <div v-if="filteredList.length > 0">
             <div class="float-left" v-if='data.length > 0'>Page: {{ currentPage }} of {{totalPages}}</div>
             <div class="float-right">
@@ -60,20 +64,11 @@
 </template>
 
 <script>
-    import Loader from './Loader';
+    import Spinner from './Spinner';
 
     export default {
         name: "TabulatedData",
-        components: {Loader},
-        data: () => ({
-            currentSort: 'default',
-            currentSortDir: '',
-            search: '',
-            searchSelection: '',
-            currentPage: 1,
-            disable: '',
-            disableNext: '',
-        }),
+        components: {Spinner},
         props: {
             sortBy: {
                 type: String,
@@ -113,15 +108,20 @@
                 type: String, // striped | hover
                 default: 'striped'
             },
-            title: {
+            theme: {
                 type: String,
-                default: ''
-            },
-            subTitle: {
-                type: String,
-                default: ''
-            },
+                default: 'light'
+            }
         },
+        data: () => ({
+            currentSort: 'default',
+            currentSortDir: 'default',
+            search: '',
+            searchSelection: '',
+            currentPage: 1,
+            disable: '',
+            disableNext: '',
+        }),
         methods: {
             filterObject(haystack, needle = []) {
                 // console.log(haystack);
@@ -157,15 +157,10 @@
             }
         },
         computed: {
-            sortInDir() {
-                return this.sortDir || '';
-            },
             sortedActivity: function () {
                 return this.data.sort((a, b) => {
                     // Set the sorting to the first column of header
                     // Order by desc
-                    console.log(this.currentSortDir);
-
                     this.currentSort = (this.columns.length > 0 && this.currentSort === 'default') ? this.columns[0] : this.currentSort;
                     let modifier = 1;
                     if (this.currentSortDir === 'desc') modifier = -1;
@@ -201,6 +196,9 @@
             }
         },
         created() {
+            // Init the Sort By
+            this.currentSort = this.sortBy;
+            this.currentSortDir = this.sortDir;
 
             if (this.currentPage === 1)
                 this.disable = 'disabled';

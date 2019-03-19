@@ -1,12 +1,13 @@
 <template>
     <div id="app">
-        <img alt="Vue logo" src="./assets/logo.png">
-        <h1>Welcome to Your Plugin in Vue.js</h1>
+        <h1>Welcome to Tabulated Data in Vue.js</h1>
         <TabulatedData :columns="cols" :loading="false"
                        :data="data" :actions="actions"
+                       theme="light"
                        @unblockUser="unblockUser" @blockUser="blockUser"
                        sortBy="username" sortDir="asc"
         ></TabulatedData>
+        <h1></h1>
     </div>
 </template>
 
@@ -17,7 +18,25 @@
         components: {TabulatedData},
         data() {
             return {
-                cols: ['id', 'name', 'username', 'status'],
+                cols: [
+                    {
+                        label: "User ID",
+                        field: "id"
+                    },
+                    {
+                        label: "Full name",
+                        field: 'name'
+                    },
+                    {
+                        label: 'Username',
+                        field: 'username'
+                    },
+                    {
+                        label: 'Status',
+                        field: 'status'
+                    }
+                ],
+                dataB: [],
                 data: [
                     {id: 1, name: 'Steve Abolarin', username: 'code', status: 'Active', StatusInt: 1},
                     {id: 2, name: 'Nath Abolarin', username: 'codel', status: 'Inactive', StatusInt: 0},
