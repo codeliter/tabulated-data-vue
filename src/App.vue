@@ -3,7 +3,7 @@
         <h1 class="welcome">Welcome to Tabulated Data in Vue.js</h1>
         <TabulatedData :columns="cols" :loading="false"
                        :data="data" :actions="actions"
-                       theme="light"
+                       :darkMode="true"
                        @unblockUser="unblockUser" @blockUser="blockUser"
                        sortBy="username" sortDir="asc"
         ></TabulatedData>

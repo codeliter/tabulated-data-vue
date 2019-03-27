@@ -1,5 +1,5 @@
 <template>
-    <div class="tabulated-data dark-mode">
+    <div class="tabulated-data" v-bind:class="{'dark-mode': darkMode}">
         <div class="form-group tab-data-search">
             <input type="text" class="form-control" v-model="search" placeholder="Search"
                    :disabled="loading && filteredList.length === 0">
@@ -18,8 +18,7 @@
             <tr v-for="(item, index) in (sortedActivity, filteredList)"
                 v-bind:key="index">
                 <td v-for="(col, colIndex) in columns" :key="colIndex" v-html="itemValue(item, col.field)">
-                    {{itemValue(item,
-                    col.field)}}
+                    {{itemValue(item, col.field)}}
                 </td>
                 <!--v-if="dontShowKey === action && dontShowValue === action.dontShowKey"-->
                 <td v-if="actions.length > 0">
@@ -56,7 +55,7 @@
                 <button @click="prevPage" class="btn btn-info btn-sm" v-bind:class="disable"><i
                         class="fas fa-arrow-left"></i> Previous
                 </button> &nbsp; &nbsp; &nbsp;
-                <button @click="nextPage" class="btn btn-info btn-sm1" v-bind:class="disableNext">Next <i
+                <button @click="nextPage" class="btn btn-info btn-sm1 " v-bind:class="{disable: (totalPages === 1)}">Next <i
                         class="fas fa-arrow-right"></i></button>
             </div>
         </div>
@@ -108,9 +107,9 @@
                 type: String, // striped | hover
                 default: 'striped'
             },
-            theme: {
-                type: String,
-                default: 'light'
+            darkMode: {
+                type: Boolean,
+                default: false
             }
         },
         data: () => ({
