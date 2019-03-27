@@ -1,5 +1,5 @@
 <template>
-    <div class="tabulated-data">
+    <div class="tabulated-data dark-mode">
         <div class="form-group tab-data-search">
             <input type="text" class="form-control" v-model="search" placeholder="Search"
                    :disabled="loading && filteredList.length === 0">
@@ -26,7 +26,7 @@
                         <span v-for="(action, actionIndex) in actions" :key="actionIndex">
                             <button v-if="typeof action.showKey === 'undefined' || action.showKey.length === 0 || action.showWhen.indexOf(item[action.showKey]) !== -1"
                                     :title="action.title || ''"
-                                    :class="action.class" class="btn-sm action-btn" v-bind="$attrs"
+                                    :class="action.class" class="btn-sm1" v-bind="$attrs"
                                     @click="handleCallback(action.callback, filterObject(item, action.args))">
                                 {{ action.text }}
                             </button>
@@ -51,12 +51,12 @@
 
 
         <div v-if="filteredList.length > 0">
-            <div class="float-left" v-if='data.length > 0'>Page: {{ currentPage }} of {{totalPages}}</div>
+            <div class="float-left pagenumber" v-if='data.length > 0'>Page: {{ currentPage }} of {{totalPages}}</div>
             <div class="float-right">
                 <button @click="prevPage" class="btn btn-info btn-sm" v-bind:class="disable"><i
                         class="fas fa-arrow-left"></i> Previous
                 </button> &nbsp; &nbsp; &nbsp;
-                <button @click="nextPage" class="btn btn-info btn-sm" v-bind:class="disableNext">Next <i
+                <button @click="nextPage" class="btn btn-info btn-sm1" v-bind:class="disableNext">Next <i
                         class="fas fa-arrow-right"></i></button>
             </div>
         </div>
