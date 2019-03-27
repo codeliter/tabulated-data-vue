@@ -4,7 +4,7 @@
             <input type="text" class="form-control" v-model="search" placeholder="Search"
                    :disabled="loading && filteredList.length === 0">
         </div>
-        <table class="table table-striped table-responsive-sm" style="width:100%">
+        <table class="table table-striped table-responsive-sm" style="  width:100%">
             <thead>
             <tr>
                 <th scope="col" v-for="(column, columnIndex) in columns" @click="sort(column.field)" :key="columnIndex">
