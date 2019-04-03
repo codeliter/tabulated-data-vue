@@ -1,10 +1,10 @@
 <template>
-    <div class="tabulated-data">
+    <div class="tabulated-data" v-bind:class="{'dark-mode': darkMode}">
         <div class="form-group tab-data-search">
             <input type="text" class="form-control" v-model="search" placeholder="Search"
                    :disabled="loading && filteredList.length === 0">
         </div>
-        <table class="table table-striped table-responsive-sm" style="width:100%">
+        <table class="table table-striped table-responsive-sm" style="  width:100%">
             <thead>
             <tr>
                 <th scope="col" v-for="(column, columnIndex) in columns" @click="sort(column.field)" :key="columnIndex">
@@ -18,15 +18,14 @@
             <tr v-for="(item, index) in (sortedActivity, filteredList)"
                 v-bind:key="index">
                 <td v-for="(col, colIndex) in columns" :key="colIndex" v-html="itemValue(item, col.field)">
-                    {{itemValue(item,
-                    col.field)}}
+                    {{itemValue(item, col.field)}}
                 </td>
                 <!--v-if="dontShowKey === action && dontShowValue === action.dontShowKey"-->
                 <td v-if="actions.length > 0">
                         <span v-for="(action, actionIndex) in actions" :key="actionIndex">
                             <button v-if="typeof action.showKey === 'undefined' || action.showKey.length === 0 || action.showWhen.indexOf(item[action.showKey]) !== -1"
                                     :title="action.title || ''"
-                                    :class="action.class" class="btn-sm action-btn" v-bind="$attrs"
+                                    :class="action.class" class="btn-sm1" v-bind="$attrs"
                                     @click="handleCallback(action.callback, filterObject(item, action.args))">
                                 {{ action.text }}
                             </button>
@@ -51,12 +50,12 @@
 
 
         <div v-if="filteredList.length > 0">
-            <div class="float-left" v-if='data.length > 0'>Page: {{ currentPage }} of {{totalPages}}</div>
+            <div class="float-left pagenumber" v-if='data.length > 0'>Page: {{ currentPage }} of {{totalPages}}</div>
             <div class="float-right">
                 <button @click="prevPage" class="btn btn-info btn-sm" v-bind:class="disable"><i
                         class="fas fa-arrow-left"></i> Previous
                 </button> &nbsp; &nbsp; &nbsp;
-                <button @click="nextPage" class="btn btn-info btn-sm" v-bind:class="disableNext">Next <i
+                <button @click="nextPage" class="btn btn-info btn-sm1 " v-bind:class="{disable: (totalPages === 1)}">Next <i
                         class="fas fa-arrow-right"></i></button>
             </div>
         </div>
@@ -108,9 +107,9 @@
                 type: String, // striped | hover
                 default: 'striped'
             },
-            theme: {
-                type: String,
-                default: 'light'
+            darkMode: {
+                type: Boolean,
+                default: false
             }
         },
         data: () => ({

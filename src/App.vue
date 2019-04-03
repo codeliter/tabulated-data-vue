@@ -1,9 +1,9 @@
 <template>
     <div id="app">
-        <h1>Welcome to Tabulated Data in Vue.js</h1>
+        <h1 class="welcome">Welcome to Tabulated Data in Vue.js</h1>
         <TabulatedData :columns="cols" :loading="false"
                        :data="data" :actions="actions"
-                       theme="light"
+                       :darkMode="true"
                        @unblockUser="unblockUser" @blockUser="blockUser"
                        sortBy="username" sortDir="asc"
         ></TabulatedData>
@@ -24,7 +24,7 @@
                         field: "id"
                     },
                     {
-                        label: "Full name",
+                        label: "Full Name",
                         field: 'name'
                     },
                     {
@@ -45,7 +45,7 @@
                 ],
                 actions: [
                     {
-                        class: 'btn btn-primary',
+                        // class: 'btn btn-primary',
                         callback: 'blockUser',
                         args: ['id', 'name'],
                         text: 'Block user',
@@ -54,7 +54,7 @@
                         showWhen: [1]
                     },
                     {
-                        class: 'btn btn-danger',
+                        // class: 'btn btn-danger',
                         callback: 'unblockUser',
                         args: ['id', 'name'],
                         text: 'Unblock user',
@@ -83,6 +83,6 @@
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2c3e50;
-        margin-top: 60px;
+        margin: 4em;
     }
 </style>
