@@ -22,8 +22,11 @@ module.exports = {
           link: 'https://github.com//tabulated-data/releases'
         }],
         sidebar: [
+          '/',
           '/installation.md',
           '/started.md',
+          '/passing-props.md',
+          '/passing-function.md',
         ]
       }
     }
