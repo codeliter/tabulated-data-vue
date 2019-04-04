@@ -14,7 +14,9 @@ To use the TabulatedData component you need to pass props to it. see the list of
       The columns props define the header for the table and the column of data it should be assigned to in the table content to be rendered. 
       It is an array containing objects, each object containing the <strong>label</strong> which is the text to be shown
       in the head of the table while the <strong>field</strong> maps the heading to the value to of the property key in the data
-      passed to the tablated data. see example <a href="#columns">here</a>
+      passed to the tablated data. 
+      <br><br>
+      See example <a href="#columns">here</a>
       </td>
     </tr>
     <tr>
@@ -25,8 +27,9 @@ To use the TabulatedData component you need to pass props to it. see the list of
         column props for it to be mapped to that particular column. 
         <br><br>
         A value needed only by an <strong>action</strong> should also be passed in the objects but the key for the value
-        should not match any field defined in the column props.<br><br>
-        see example <a href="#data">here</a>
+        should not match any field defined in the column props.
+        <br><br>
+        See example <a href="#data">here</a>
       </td>
     </tr>
     <tr>
@@ -34,7 +37,9 @@ To use the TabulatedData component you need to pass props to it. see the list of
       <td>
         We can define action buttons like edit, delete, view for each row of the table for users to interact
         with each row of data differently. This buttons can be displayed or shown when a condition is met.
-        You can pass an array of object of actions. see example. <a href="#actions">here</a> 
+        You can pass an array of object of actions. 
+        <br><br>
+        See example <a href="#actions">here</a> 
       </td>
     </tr>
     <tr>
@@ -50,7 +55,8 @@ To use the TabulatedData component you need to pass props to it. see the list of
         TabulatedData makes sorting the table easy on initialization of the table if any data exists or when data 
         is to be rendered. Here we pass the <b>field</b> name matching what has been declared in our columns 
         prop for our data to be sorted by.
-        see example <a href="#sort-by">here</a>
+        <br><br>
+        See example <a href="#sort-by">here</a>
       </td>
     </tr>
     <tr>
@@ -58,7 +64,8 @@ To use the TabulatedData component you need to pass props to it. see the list of
       <td>You can sort the table content in either <b>ASC</b>(ascending) or <b>DESC</b>(descending) order. 
       If a column containing alphabets or alphanumeric values is assigned to the sortBy, sorting is carried out from a-z
       in ASC order or z-a in DESC.
-      see example <a href="#sort-direction">here</a></td>
+      <br><br>
+      See example <a href="#sort-direction">here</a></td>
     </tr>
     <tr>
       <td>loading</td>
@@ -75,7 +82,7 @@ To use the TabulatedData component you need to pass props to it. see the list of
        <td>showPerPage</td>
        <td>
         This must be a number and as the name suggests it defines how many records should be shown per page. 
-        The default is 12.
+        The default is 12 items per page.
        </td>
     </tr>
   </tbody>
@@ -304,6 +311,20 @@ If we assign a callback with the name deleteUser we have to do this to our Tabul
 
 The deleteUser function passed as ref must be declared in our component methods.
 
+
+<b>args</b>: This is an array of the arguments to be passed when TabulatedData calls the callback attached to the button.
+This can be left empty if the callback doesn't require an argument. Every value in the array of <i>args</i> must already exists in the 
+data for each row rendered in our table body. 
+
+
+<b>showKey</b>: This is optional and only needed if we conditionally need to display or hide a button. This must be a string
+and must have been passed among the data to be rendered in our table body as it maps to the key in the object rendered for each row.
+
+
+<b>showWhen:</b>: This is optional and if passed must be an array of values we expect our <b><i>showKey</i></b> value to
+to be for this button to be shown for the particular page.
+
+
 ## Theme
 
 We have 2 default themes, <b>Light </b> and <b>Dark</b>
@@ -320,7 +341,8 @@ We have 2 default themes, <b>Light </b> and <b>Dark</b>
 
 ## Sort By
 
-You can sort by any of the columns specified
+You can sort by any of the object key passed in our array of objects data passed to be rendered as our table body.
+This is not required but if passed must be a key defined in the data to be rendered as our table body.
 ```html
 <template>
     <TabulatedData  :columns="cols"  
@@ -336,7 +358,8 @@ You can sort by any of the columns specified
 
 ## Sort Direction
 
-You can sort direction either ASC or DESC
+You can sort in either <b><i>asc</i></b>(ascending) or <b><i>desc</i></b>(descending) order. 
+This is optional and is not required
 ```html
 <template>
     <TabulatedData  :columns="cols"  
