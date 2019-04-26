@@ -27,6 +27,7 @@ module.exports = {
           '/started.md',
           '/passing-props.md',
           '/passing-function.md',
+          '/contributors.md'
         ]
       }
     }
